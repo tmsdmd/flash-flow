@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1727" />
+    <meta
+      name="description"
+      content="FlashFlow — مساعد تعلم شخصي محلي يقرأ الملفات ويولد بطاقات مراجعة ذكية بدون إنترنت."
+    />
+    <title>FlashFlow | مساعد تعلم شخصي</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">F</div>
+          <div>
+            <p class="eyebrow">محلي · ذكي · بدون إنترنت</p>
+            <h1>FlashFlow</h1>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="resetDataBtn" class="ghost-btn">مسح البيانات</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel source-panel">
+          <div class="panel-header">
+            <div>
+              <p class="muted-label">مصدر التعلم</p>
+              <h2>تحميل الملف أو لصق النص</h2>
+            </div>
+            <span id="statusPill" class="status-pill neutral">جاهز</span>
+          </div>
+
+          <div class="upload-area">
+            <label for="fileInput" class="upload-box">
+              <input id="fileInput" type="file" accept=".txt,.md,.json,.csv" />
+              <span>اختر ملف نصي أو Markdown أو JSON</span>
+            </label>
+          </div>
+
+          <label class="field-label" for="sourceText">أو الصق نصك هنا</label>
+          <textarea id="sourceText" placeholder="قم بلصق النص أو الملاحظات أو وصف الموضوع ..."></textarea>
+
+          <div class="controls-row">
+            <div class="field-group">
+              <label for="cardLimit">عدد البطاقات</label>
+              <input id="cardLimit" type="number" min="5" max="60" value="20" />
+            </div>
+
+            <div class="field-group">
+              <label for="difficultyMode">طريقة المراجعة</label>
+              <select id="difficultyMode">
+                <option value="mixed">مختلطة</option>
+                <option value="cards">بطاقات فقط</option>
+                <option value="quiz">أسئلة</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="generateBtn" class="primary-btn">إنشاء بطاقات ذكية</button>
+        </section>
+
+        <section class="panel summary-panel">
+          <div class="panel-header">
+            <div>
+              <p class="muted-label">نظرة سريعة</p>
+              <h2>ملخص المحتوى</h2>
+            </div>
+          </div>
+
+          <div id="summaryBox" class="summary-box empty-box">
+            سيتم إنشاء ملخص للمحتوى تلقائيًا بعد معالجة الملف.
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span>إجمالي البطاقات</span>
+              <strong id="totalCardsStat">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>مراجعات اليوم</span>
+              <strong id="todayReviewStat">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>نسبة النجاح</span>
+              <strong id="successRateStat">0%</strong>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <section class="panel review-panel">
+        <div class="panel-header">
+          <div>
+            <p class="muted-label">جلسة مراجعة</p>
+            <h2>مراجعة البطاقات</h2>
+          </div>
+          <button id="startReviewBtn" class="secondary-btn">ابدأ المراجعة</button>
+        </div>
+
+        <div id="reviewCard" class="review-card hidden">
+          <div class="review-meta">
+            <span id="cardIndexText">بطاقة 1</span>
+            <span id="cardDifficultyText">جديد</span>
+          </div>
+
+          <div id="cardFront" class="flash-front"></div>
+          <div id="cardBack" class="flash-back hidden"></div>
+
+          <div class="review-actions">
+            <button id="showAnswerBtn" class="primary-btn small-btn">عرض الإجابة</button>
+            <button id="againBtn" class="danger-btn small-btn">مرة أخرى</button>
+            <button id="goodBtn" class="secondary-btn small-btn">ممتاز</button>
+            <button id="easyBtn" class="success-btn small-btn">سهل</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel deck-panel">
+        <div class="panel-header">
+          <div>
+            <p class="muted-label">مجموعة البطاقات</p>
+            <h2>قائمة بطاقاتك</h2>
+          </div>
+        </div>
+
+        <div id="deckList" class="deck-list"></div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
